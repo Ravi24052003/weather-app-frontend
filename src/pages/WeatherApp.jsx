@@ -13,6 +13,7 @@ function WeatherApp() {
 
   const isJWTexpired = useSelector(state=> state.login.isJWTexpired);
   const delhiWeather = useSelector(state=> state.weather.delhiWeather);
+  const weatherArr = useSelector(state=>state.weather.weatherArr)
   const status = useSelector(state=> state.weather.status);
 
   useEffect(()=>{
@@ -23,11 +24,17 @@ function WeatherApp() {
 
 
   useEffect(()=>{
-    dispatch(fetchAsyncArr())
+    if(weatherArr.length === 0){
+      dispatch(fetchAsyncArr())
+    }
+    
   }, [])
 
   useEffect(()=>{
-    dispatch(fetchAsyncDelhi())
+    if(!delhiWeather?.temp){
+      dispatch(fetchAsyncDelhi())
+    }
+    
   }, [])
 
   return (

@@ -25,7 +25,9 @@ const SearchHistory = () => {
     }, [])
 
     useEffect(()=>{
-      dispatch(fetchAsyncDelhi())
+      if(!delhiWeather?.temp){
+        dispatch(fetchAsyncDelhi())
+      }
     }, [])
 
   return (
